@@ -1,5 +1,6 @@
 using Application.Abstraction;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Teachers.Get;
 
@@ -20,7 +21,7 @@ public class GetAllTeacherHandler : IRequestHandler<GetAllTeacherRequest, List<T
     public async Task<List<TeacherResponse>> Handle(GetAllTeacherRequest request, CancellationToken cancellationToken)
     {
         //todo this can be optimized for pagination
-        return (await from teacher in _applicationDb.Teachers
+        return await ( from teacher in _applicationDb.Teachers
             join title in _applicationDb.Titles on teacher.TitleId equals title.Id
             select new TeacherResponse(
                 teacher.FirstName,

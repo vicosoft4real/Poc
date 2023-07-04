@@ -16,7 +16,6 @@ public abstract class Profile : EntityBase<Guid>
     public string SurName { get; private set; }
     public DateTimeOffset DateOfBirth { get; private set; }
     
-    public  DateTimeOffset CreatedAt { get; } = DateTimeOffset.UtcNow;
     
     /// <summary>
     /// Validate age of teacher

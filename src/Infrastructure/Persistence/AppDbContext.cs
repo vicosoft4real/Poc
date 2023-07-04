@@ -31,15 +31,3 @@ public class AppDbContext : DbContext , IApplicationDb
         base.OnModelCreating(modelBuilder);
     }
 }
-
-public class AppContextFactory : IDesignTimeDbContextFactory<AppDbContext>
-{
-    public AppDbContext CreateDbContext(string[] args)
-    {
-        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-        optionsBuilder.UseNpgsql("Host=localhost;Database=School;Username=postgres;Password=12345678");
-        return new AppDbContext(optionsBuilder.Options);
-
-        
-    }
-}

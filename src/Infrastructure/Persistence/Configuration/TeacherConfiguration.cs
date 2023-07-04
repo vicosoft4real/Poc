@@ -1,4 +1,3 @@
-using System.Data.Entity.ModelConfiguration;
 using Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

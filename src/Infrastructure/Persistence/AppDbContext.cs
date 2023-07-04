@@ -2,6 +2,7 @@ using Application.Abstraction;
 using Core.Entity;
 using Core.ValueObject;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Infrastructure.Persistence;
 
@@ -28,5 +29,17 @@ public class AppDbContext : DbContext , IApplicationDb
             new ("Prof")
         });
         base.OnModelCreating(modelBuilder);
+    }
+}
+
+public class AppContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+{
+    public AppDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        optionsBuilder.UseNpgsql("Host=localhost;Database=School;Username=postgres;Password=12345678");
+        return new AppDbContext(optionsBuilder.Options);
+
+        
     }
 }

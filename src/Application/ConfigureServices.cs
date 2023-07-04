@@ -11,6 +11,8 @@ public static class ConfigureServices
         services.AddMediatR(c=> c.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         
+        
+        
         return services;
     }
 }

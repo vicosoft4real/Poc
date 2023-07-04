@@ -24,6 +24,7 @@ public class GetAllTeacherHandler : IRequestHandler<GetAllTeacherRequest, List<T
         return await ( from teacher in _applicationDb.Teachers
             join title in _applicationDb.Titles on teacher.TitleId equals title.Id
             select new TeacherResponse(
+                teacher.Id,
                 teacher.FirstName,
                 teacher.SurName,
                 teacher.DateOfBirth,

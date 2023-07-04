@@ -1,3 +1,4 @@
+using Core.Exception;
 using Core.ValueObject;
 
 namespace Core.Entity;
@@ -16,6 +17,7 @@ public class Teacher : Profile
     public Teacher(string firstName, string surName, DateTimeOffset dateOfBirth, string teachNumber, Money? salary, Guid titleId) :
         base(firstName, surName, dateOfBirth)
     {
+        ValidateAge(dateOfBirth);
         TeachNumber = teachNumber;
         Salary = salary;
         TitleId = titleId;
@@ -34,7 +36,18 @@ public class Teacher : Profile
    
 
     #region Private Methods
-
+    /// <summary>
+    /// Validate age of teacher
+    /// </summary>
+    /// <param name="dateOfBirth"></param>
+    /// <exception cref="InvalidAgeException"></exception>
+    private void ValidateAge(DateTimeOffset dateOfBirth)
+    {
+        if (dateOfBirth > DateTimeOffset.UtcNow.AddYears(-22))
+        {
+            throw new InvalidAgeException("Teacher age must not be less than 21 years old");
+        }
+    }
 
     /// <summary>
     /// for EF 

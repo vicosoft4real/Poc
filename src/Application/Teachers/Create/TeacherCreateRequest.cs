@@ -10,7 +10,7 @@ public record TeacherCreateRequest(
     DateTimeOffset DateOfBirth,
     string TeachNumber,
     Money? Salary,
-    Guid TitleId) : IRequest<(bool Success, string[] Errors)>
+    Guid TitleId) : IRequest<(bool Succeed, string[] Errors)>
 {
     public  TeacherCreateRequestValidator GetValidationInstance()
     {

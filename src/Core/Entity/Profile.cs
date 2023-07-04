@@ -8,7 +8,6 @@ public abstract class Profile : EntityBase<Guid>
     {
         FirstName = firstName;
         SurName = surName;
-        ValidateAge(dateOfBirth);
         DateOfBirth = dateOfBirth;
     }
 
@@ -17,16 +16,5 @@ public abstract class Profile : EntityBase<Guid>
     public DateTimeOffset DateOfBirth { get; private set; }
     
     
-    /// <summary>
-    /// Validate age of teacher
-    /// </summary>
-    /// <param name="dateOfBirth"></param>
-    /// <exception cref="InvalidAgeException"></exception>
-    private void ValidateAge(DateTimeOffset dateOfBirth)
-    {
-        if (dateOfBirth > DateTimeOffset.UtcNow.AddYears(-22))
-        {
-            throw new InvalidAgeException("Teacher age must not be less than 21 years old");
-        }
-    }
+ 
 }

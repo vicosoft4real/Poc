@@ -15,9 +15,9 @@ public class Student : Profile
     public Student(string firstName, string surName, DateTimeOffset dateOfBirth, string nationalId, string studentNumber) 
         : base(firstName, surName, dateOfBirth)
     {
+        ValidateAge(dateOfBirth);
         NationalId = nationalId;
         StudentNumber = studentNumber;
-        ValidateStudentAge(dateOfBirth);
     }
 
     #region Private Methods
@@ -27,24 +27,24 @@ public class Student : Profile
     private Student() : base("", "", DateTimeOffset.UtcNow)
     {
     }
-
     /// <summary>
-    /// Validate student age
+    /// Validate age of teacher
     /// </summary>
     /// <param name="dateOfBirth"></param>
     /// <exception cref="InvalidAgeException"></exception>
-    private void ValidateStudentAge(DateTimeOffset dateOfBirth)
+    private void ValidateAge(DateTimeOffset dateOfBirth)
     {
-        if (dateOfBirth.AddYears(22) < DateTimeOffset.UtcNow)
+        var minYear=DateTimeOffset.UtcNow.AddYears(-23).Date.Year;
+        var currentYear = DateTimeOffset.UtcNow.Date.Year;
+        if (dateOfBirth.Date.Year > currentYear || dateOfBirth.Date.Year <= minYear)
         {
-            throw new InvalidAgeException("Student age must be less than 22 years old");
+            throw new InvalidAgeException("Student age must  be less than 21 years old");
         }
     }
-
     #endregion
     
 
-    public string NationalId { get; private set; } = null!;
-    public string StudentNumber { get; private set; } = null!;
+    public string NationalId { get; private set; } 
+    public string StudentNumber { get; private set; }
     
 }

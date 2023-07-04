@@ -1,5 +1,4 @@
 using Application.Teachers.Create;
-using Application.Teachers.Get;
 using Ardalis.GuardClauses;
 using Core.Entity;
 
@@ -22,20 +21,6 @@ public static class TeacherExtension
 
     }
     
-    public static TeacherResponse MapToResponse(this Teacher teacher)
-    {
-        Guard.Against.Null(teacher, nameof(teacher));
-        return new TeacherResponse
-        (
-            teacher.FirstName,
-            teacher.SurName,
-            teacher.DateOfBirth,
-            teacher.TeachNumber,
-            teacher.Salary,
-            teacher.Title?.Name!
-        );
-
-    }
     
     
 }

@@ -5,9 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class TeacherController : ControllerBase
+
+public class TeacherController : BaseController
 {
     private readonly IMediator _mediator;
 

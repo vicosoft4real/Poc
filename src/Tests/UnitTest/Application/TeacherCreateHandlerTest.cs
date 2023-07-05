@@ -1,7 +1,8 @@
 using Application.Abstraction;
 using Application.Teachers.Create;
-using Core.ValueObject;
 using NSubstitute;
+using Tests.Common;
+
 namespace Tests.UnitTest.Application;
 
 public class TeacherCreateHandlerTest
@@ -21,7 +22,7 @@ public class TeacherCreateHandlerTest
         _applicationDb.SaveChangesAsync(Arg.Any<CancellationToken>()).Returns(1);
         var handler = new TeacherCreateHandler(_applicationDb);
         
-        var request = TeacherCreateRequest();
+        var request = Utility.GetTeacherCreateRequest();
 
         //Act
         var response = await handler.Handle(request, CancellationToken.None);
@@ -39,7 +40,7 @@ public class TeacherCreateHandlerTest
         _applicationDb.SaveChangesAsync(Arg.Any<CancellationToken>()).Returns(0);
         var handler = new TeacherCreateHandler(_applicationDb);
         
-        var request = TeacherCreateRequest();
+        var request = Utility.GetTeacherCreateRequest();
         
         var response = await handler.Handle(request, CancellationToken.None);
         
@@ -48,16 +49,5 @@ public class TeacherCreateHandlerTest
     }
     
     
-    private static TeacherCreateRequest TeacherCreateRequest()
-    {
-        string firstName = "John";
-        string surName = "Doe";
-        DateTimeOffset dateOfBirth = DateTimeOffset.UtcNow.AddYears(-22);
-        string teachNumber = "123";
-        Money salary = new Money(1000, "NGN");
-        Guid titleId = Guid.NewGuid();
 
-        var request = new TeacherCreateRequest(firstName, surName, dateOfBirth, teachNumber, salary, titleId);
-        return request;
-    }
 }

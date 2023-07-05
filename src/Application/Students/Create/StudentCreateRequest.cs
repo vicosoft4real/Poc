@@ -25,7 +25,7 @@ public class StudentCreateRequestValidator : AbstractValidator<StudentCreateRequ
         RuleFor(x => x.SurName).NotEmpty().WithMessage("Surname is required");
         RuleFor(x => x.DateOfBirth)
             .InclusiveBetween(DateTimeOffset.UtcNow.AddYears(-22).Date,DateTimeOffset.UtcNow.Date)
-            .WithMessage("Date of birth is required and must be less than 22 years old");
+            .WithMessage("Date of birth is required and must not be more than 22 years");
         RuleFor(x => x.NationalId).NotEmpty().WithMessage("National id is required");
         RuleFor(x => x.StudentNumber).NotEmpty().WithMessage("Student number is required");
     }

@@ -1,6 +1,7 @@
 using Application.Abstraction;
 using Application.Students.Create;
 using NSubstitute;
+using Tests.Common;
 
 namespace Tests.UnitTest.Application;
 
@@ -21,7 +22,7 @@ public class StudentCreateHandlerTest
         _applicationDb.SaveChangesAsync(Arg.Any<CancellationToken>()).Returns(1);
         var handler = new StudentCreateHandler(_applicationDb);
         
-        var request = StudentCreateRequest();
+        var request = Utility.GetStudentCreateRequest();
 
         //Act
         var response = await handler.Handle(request, CancellationToken.None);
@@ -37,7 +38,7 @@ public class StudentCreateHandlerTest
         _applicationDb.SaveChangesAsync(Arg.Any<CancellationToken>()).Returns(0);
         var handler = new StudentCreateHandler(_applicationDb);
 
-        var request = StudentCreateRequest();
+        var request = Utility.GetStudentCreateRequest();
 
         var response = await handler.Handle(request, CancellationToken.None);
 
@@ -67,15 +68,5 @@ public class StudentCreateHandlerTest
     }
 
 
-    private static StudentCreateRequest StudentCreateRequest()
-    {
-        string firstName = "John";
-        string surName = "Doe";
-        DateTimeOffset dateOfBirth = DateTimeOffset.UtcNow.AddYears(-22);
-        string matricNumber = "123";
-        string jambRegistrationNumber = "123";
-
-        var request = new StudentCreateRequest(firstName, surName, dateOfBirth, matricNumber, jambRegistrationNumber);
-        return request;
-    }
+  
 }

@@ -1,7 +1,7 @@
 # PoC
 
 ###
-To Run the application, the following steps:
+To Run the application, do the following steps:
 
 1. Change the connection string to your Postgres database
 2. Restore the packages and build the project

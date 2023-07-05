@@ -1,4 +1,5 @@
 using System.Reflection;
+using Application.Teachers.Create;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ public static class ConfigureServices
     {
         services.AddMediatR(c=> c.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddValidatorsFromAssemblyContaining<TeacherCreateRequestValidator>();
         
         
         
